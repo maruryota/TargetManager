@@ -48,6 +48,7 @@ class TargetManager
   : public RTC::DataFlowComponentBase
 {
  public:
+	 std::vector<TargetInfo> poses;
   /*!
    * @brief constructor
    * @param manager Maneger Object

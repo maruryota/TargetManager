@@ -170,20 +170,23 @@ RTC::ReturnCode_t TargetManager::onExecute(RTC::UniqueId ec_id)
 
 		if (poses.size() > 0) {
 			double distance;
-			distance = pow(m_currentPose.data.position.x - poses[0].pose[0], 2) + pow(m_currentPose.data.position.y - poses[0].pose[1], 2);
+			distance = pow(m_currentPose.position.x - poses[0].pose[0], 2) + pow(m_currentPose.position.y - poses[0].pose[1], 2);
 			distance = pow(distance, 1 / 2);
 			int nearest_idx = 0;
 			for (int i = 1; i++; i < poses.size()) {
-				double d = pow(m_currentPose.data.position.x - poses[i].pose[0], 2) + pow(m_currentPose.data.position.y - poses[i].pose[1], 2);
+				double d = pow(m_currentPose.position.x - poses[i].pose[0], 2) + pow(m_currentPose.position.y - poses[i].pose[1], 2);
 				if (d < distance) {
 					distance = d;
 					nearest_idx = i;
 				}
 			}
 			TargetInfo return_pose = poses[nearest_idx];
-			RTC::RETURN_VALUE retval = m_tidyUpManager->tidyup(return_pose);
+			RTC::Pose2D ret_pose;
+			ret_pose.position.x = poses[0].pose[0];
+			ret_pose.position.y = poses[1].pose[1];
+			ogata::RETURN_VALUE retval = m_tidyUpManager->tidyup(ret_pose);
 
-			if (retval = RTC::RETURN_VALUE::RETVAL_OK) {
+			if (retval = ogata::RETURN_VALUE::RETVAL_OK) {
 				poses.erase(poses.begin() + nearest_idx);
 				std::cout << "tidy up success!" << std::endl;
 			}
@@ -193,7 +196,6 @@ RTC::ReturnCode_t TargetManager::onExecute(RTC::UniqueId ec_id)
 		}
 	}
 
-	// posesがひとつ以上あればTidyUpManagerへ
   return RTC::RTC_OK;
 }
 
