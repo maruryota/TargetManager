@@ -36,6 +36,8 @@
 #include <rtm/CorbaPort.h>
 #include <rtm/DataInPort.h>
 #include <rtm/DataOutPort.h>
+#include "TargetInfo.h"
+
 
 using namespace RTC;
 

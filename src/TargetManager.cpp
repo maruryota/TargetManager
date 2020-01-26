@@ -134,14 +134,15 @@ RTC::ReturnCode_t TargetManager::onExecute(RTC::UniqueId ec_id)
 		while (std::getline(ss, string_pose, ',')) {
 			std::vector<double> d;
 			std::stringstream ss2{ string_pose };
+			TargetInfo get_pose;
 			int count = 0;
 			while (std::getline(ss2, string_pose2, ' ')) {
-				float d_in = std::stod(string_pose2);
+				double d_in = std::stod(string_pose2);
 				if ((count == 0) || (count == 1)) {
-					get_poses.pose.push_back(d_in);
+					get_pose.pose.push_back(d_in);
 				}
 				else if (count == 2) {
-					get_poses.kind = string_pose2;
+					get_pose.kind = string_pose2;
 				}
 				else {
 					std::cout << "unknown string:" << data << std::endl;
@@ -149,6 +150,7 @@ RTC::ReturnCode_t TargetManager::onExecute(RTC::UniqueId ec_id)
 				}
 				count++;
 			}
+			get_poses.push_back(get_pose);
 		}
 
 		// 与えられた座標がすでにあるものかどうかの判定
