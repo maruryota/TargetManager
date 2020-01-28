@@ -243,10 +243,10 @@ class TargetManager
   /*!
    */
   InPort<RTC::TimedString> m_pointIn;
-  RTC::Pose2D m_currentPose;
+  RTC::TimedPose2D m_currentPose;
   /*!
    */
-  InPort<RTC::Pose2D> m_currentPoseIn;
+  InPort<RTC::TimedPose2D> m_currentPoseIn;
   
   // </rtc-template>
 

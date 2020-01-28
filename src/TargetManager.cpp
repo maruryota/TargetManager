@@ -117,7 +117,7 @@ RTC::ReturnCode_t TargetManager::onDeactivated(RTC::UniqueId ec_id)
 
 RTC::ReturnCode_t TargetManager::onExecute(RTC::UniqueId ec_id)
 {
-	if (m_currentPoseIn.isNew) {
+	if (m_currentPoseIn.isNew()) {
 		m_currentPoseIn.read();
 	}
 	if (m_pointIn.isNew()) {
@@ -172,11 +172,11 @@ RTC::ReturnCode_t TargetManager::onExecute(RTC::UniqueId ec_id)
 
 		if (poses.size() > 0) {
 			double distance;
-			distance = pow(m_currentPose.position.x - poses[0].pose[0], 2) + pow(m_currentPose.position.y - poses[0].pose[1], 2);
+			distance = pow(m_currentPose.data.position.x - poses[0].pose[0], 2) + pow(m_currentPose.data.position.y - poses[0].pose[1], 2);
 			distance = pow(distance, 1 / 2);
 			int nearest_idx = 0;
 			for (int i = 1; i++; i < poses.size()) {
-				double d = pow(m_currentPose.position.x - poses[i].pose[0], 2) + pow(m_currentPose.position.y - poses[i].pose[1], 2);
+				double d = pow(m_currentPose.data.position.x - poses[i].pose[0], 2) + pow(m_currentPose.data.position.y - poses[i].pose[1], 2);
 				if (d < distance) {
 					distance = d;
 					nearest_idx = i;
