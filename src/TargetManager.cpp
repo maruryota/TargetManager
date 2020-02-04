@@ -186,7 +186,9 @@ RTC::ReturnCode_t TargetManager::onExecute(RTC::UniqueId ec_id)
 			RTC::Pose2D ret_pose;
 			ret_pose.position.x = poses[0].pose[0];
 			ret_pose.position.y = poses[1].pose[1];
-			ogata::RETURN_VALUE retval = m_tidyUpManager->tidyup(ret_pose);
+			RTC::TimedString ret_str;
+			ret_str.data.inout = poses[nearest_idx].kind;
+			ogata::RETURN_VALUE retval = m_tidyUpManager->tidyup(ret_pose, ret_str);
 
 			if (retval = ogata::RETURN_VALUE::RETVAL_OK) {
 				poses.erase(poses.begin() + nearest_idx);

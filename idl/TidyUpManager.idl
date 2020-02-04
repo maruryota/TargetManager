@@ -28,19 +28,19 @@ module ogata {
   };
 
   interface TidyUpManager {
-      RETURN_VALUE tidyup(in RTC::Pose2D path);
+    RETURN_VALUE tidyup(in RTC::TimedPose2D path, in RTC::TimedString kind);
   };
 
   interface StringNavigationCommanderService {
-	  RETURN_VALUE move(in RTC::Pose2D path);
+	RETURN_VALUE move(in RTC::TimedPose2D path);
   };
 
   interface Picker {
-	  RETURN_VALUE pick();
+	RETURN_VALUE pick(in RT::TimedString kind);
   };
 
   interface Droper {
-	  RETURN_VALUE drop();
+	RETURN_VALUE drop(in RTC::TimedString kind);
   };
 };
 
